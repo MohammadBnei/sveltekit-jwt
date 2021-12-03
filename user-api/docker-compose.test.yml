@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  user-api:
+    image: user-api
+    working_dir: /app
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    ports:
+      - 3001:80
+    command: npm run test
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://admin:pass@mongo/
+      - SECRET=tieunmonstre
+    stdin_open: true
+
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - 27017:27017
+
+networks:
+  default:
+    external: true
+    name: users

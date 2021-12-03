@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  user-api:
+    image: user-api
+    working_dir: /app
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    ports:
+      - 3001:80
+    command: npm run start:dev
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb+srv://voconsteroids:mkkP9xhmXeIFIERh@cluster0.bk5sj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+      - SECRET=tieunmonstre
+
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - 27017:27017
+
+networks:
+  default:
+    external: true
+    name: users

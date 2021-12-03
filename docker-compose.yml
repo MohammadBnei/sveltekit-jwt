@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  website:
+    image: node:17-alpine3.13
+    working_dir: /app
+    volumes:
+      - ./website:/app 
+    # command: npm run dev
+    stdin_open: true
+
+  user-api:
+    image: node:14-alpine3.13
+    working_dir: /app
+    volumes:
+      - ./user-api/:/app
+    command: npm run start:dev
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://admin:pass@mongo/
+      - SECRET=secret
+      - PORT=80
+    stdin_open: true
+
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - 27017:2701
+
+  nginx:
+    image: nginx:1.16.0-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80

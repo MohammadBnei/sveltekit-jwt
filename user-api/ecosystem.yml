@@ -1,0 +1,9 @@
+---
+apps:
+  - script: ./dist/bundle.js
+    name: user-api
+    env:
+      NODE_ENV: development
+    env_production:
+      NODE_ENV: production
+      

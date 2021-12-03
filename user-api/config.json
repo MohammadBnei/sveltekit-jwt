@@ -1,0 +1,13 @@
+﻿{
+    "connectionString": "mongodb://admin:pass@mongo/",
+    "secret": "secret",
+    "emailFrom": "elmo12@ethereal.email",
+    "smtpOptions": {
+        "host": "smtp.ethereal.email",
+        "port": 587,
+        "auth": {
+            "user": "elmo12@ethereal.email",
+            "pass": "MHzUA6gDNHGB8UBV7g"
+        }
+    }
+}
