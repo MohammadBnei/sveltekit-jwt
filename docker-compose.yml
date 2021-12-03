@@ -6,7 +6,7 @@ services:
     working_dir: /app
     volumes:
       - ./website:/app 
-    # command: npm run dev
+    command: npm run dev
     stdin_open: true
 
   user-api:
